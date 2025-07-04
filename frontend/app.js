@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (navigator.onLine) {
             try {
-                const res = await fetch("https://transcriptor-backend-jw83.onrender.com/");
+                const res = await fetch("https://transcriptor-backend-jw83.onrender.com/clientes_crm/");
                 if (!res.ok) throw new Error("Respuesta no válida");
 
                 const nuevosClientes = await res.json();
