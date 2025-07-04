@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (navigator.onLine) {
             try {
-                const res = await fetch("http://localhost:8000/clientes_crm/");
+                const res = await fetch("https://transcriptor-backend-jw83.onrender.com/");
                 if (!res.ok) throw new Error("Respuesta no válida");
 
                 const nuevosClientes = await res.json();
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 estado.textContent = "⏳ Transcribiendo...";
                 try {
-                    const res = await fetch("http://localhost:8000/transcribir/", {
+                    const res = await fetch("https://transcriptor-backend-jw83.onrender.com/transcribir/", {
                         method: "POST",
                         body: formData
                     });
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (navigator.onLine) {
             try {
-                const res = await fetch("http://localhost:8000/guardar/", {
+                const res = await fetch("https://transcriptor-backend-jw83.onrender.com/guardar/", {
                     method: "POST",
                     body: formData
                 });
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formData.append(key, dato[key]);
             }
             try {
-                const res = await fetch("http://localhost:8000/guardar/", {
+                const res = await fetch("https://transcriptor-backend-jw83.onrender.com/guardar/", {
                     method: "POST",
                     body: formData
                 });
