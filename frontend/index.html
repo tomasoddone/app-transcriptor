@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcriptor CRM</title>
+    <link rel="stylesheet" href="styles.css"> 
+<!-- Tom Select CSS -->
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+
+<!-- Tom Select JS -->
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="icon-192.png">
+
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Tareas de Relacionamiento</h1>
+
+        <form id="formulario">
+            <label>Comercial:
+                <select name="comercial" required>
+                    <option value="">Seleccioná un comercial</option>
+                    <option>BENJAMIN BEN</option>
+                    <option>PAULA GALLETTI</option>
+                    <option>IGNACIO GOMEZ</option>
+                    <option>CRISTIAN VILLALBA</option>
+                    <option>MARTIN RODRIGUEZ</option>
+                </select>
+            </label>
+
+            <label>Tipo de tarea:
+                <select name="tipo" required>
+                    <option value="VISITA">VISITA</option>
+                    <option value="LLAMADA">LLAMADA</option>
+                    <option value="MENSAJE">MENSAJE</option>
+                </select>
+            </label>
+
+            <label>Cliente:
+                <select name="cliente" id="cliente" required>
+                    <option value="">Cargando clientes...</option>
+                </select>
+            </label>
+
+            <button type="button" id="record">🎙️ GRABAR COMENTARIO</button>
+            <button type="button" id="stop" disabled>⏹️ DETENER</button>
+
+            <audio id="player" controls></audio>
+
+            <label>Transcripción:</label>
+            <textarea id="transcripcion" rows="5" readonly></textarea>
+
+            <button type="submit" id="guardar" disabled>✅ CONFIRMAR Y GUARDAR</button>
+        </form>
+
+        <p id="estado"></p>
+    </div>
+
+    <script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log("✅ Service Worker registrado:", reg.scope))
+      .catch(err => console.error("❌ Error al registrar el SW:", err));
+  });
+}
+</script>
+
+</body>
+</html>
