@@ -46,3 +46,8 @@ def obtener_clientes():
     except Exception as e:
         print(f"❌ Error al obtener clientes desde Google Sheets: {e}")
         return []
+import whisper
+import time
+import torch
+
+
