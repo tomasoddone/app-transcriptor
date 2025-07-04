@@ -3,5 +3,3 @@ uvicorn
 gspread
 oauth2client
 python-dotenv
-
-openai-whisper
