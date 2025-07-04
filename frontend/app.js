@@ -80,47 +80,26 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             mediaRecorder.onstop = async () => {
-                clearInterval(grabacionInterval);
-                const blob = new Blob(audioChunks, { type: "audio/wav" });
-                player.src = URL.createObjectURL(blob);
+    clearInterval(grabacionInterval);
+    const blob = new Blob(audioChunks, { type: "audio/wav" });
+    player.src = URL.createObjectURL(blob);
 
-                const formData = new FormData();
-                formData.append("file", blob, "grabacion.webm");
+    guardarBtn.disabled = false;
+    estado.textContent = "🎙️ Grabación finalizada. Escribí tu comentario.";
+};
 
-                estado.textContent = "⏳ Transcribiendo...";
-                try {
-                    const res = await fetch("https://transcriptor-backend-jw83.onrender.com/transcribir/", {
-                        method: "POST",
-                        body: formData
-                    });
+// ✅ Esto estaba mal indentado antes:
+mediaRecorder.start();
+recordBtn.disabled = true;
+stopBtn.disabled = false;
 
-                    if (!res.ok) {
-                        const errorText = await res.text();
-                        throw new Error(`Error en el servidor al transcribir: ${res.status} - ${errorText}`);
-                    }
-
-                    const data = await res.json();
-                    transcripcionTextarea.value = data.transcripcion;
-                    guardarBtn.disabled = false;
-                    estado.textContent = "✅ Transcripción lista";
-                } catch (error) {
-                    console.error("Error al transcribir:", error);
-                    estado.textContent = `❌ Error al transcribir: ${error.message}`;
-                }
-            };
-
-            mediaRecorder.start();
-            recordBtn.disabled = true;
-            stopBtn.disabled = false;
-
-            // Iniciar contador visual
-            segundosGrabados = 0;
-            estado.textContent = `🎙️ Grabando... 0s`;
-            grabacionInterval = setInterval(() => {
-                segundosGrabados++;
-                estado.textContent = `🎙️ Grabando... ${segundosGrabados}s`;
-            }, 1000);
-
+// Iniciar contador visual
+segundosGrabados = 0;
+estado.textContent = `🎙️ Grabando... 0s`;
+grabacionInterval = setInterval(() => {
+    segundosGrabados++;
+    estado.textContent = `🎙️ Grabando... ${segundosGrabados}s`;
+}, 1000);
         } catch (error) {
             console.error("Error al acceder al micrófono:", error);
             estado.textContent = "❌ Error: Necesitas dar permiso al micrófono.";
