@@ -3,3 +3,4 @@ uvicorn
 gspread
 oauth2client
 python-dotenv
+python-multipart
